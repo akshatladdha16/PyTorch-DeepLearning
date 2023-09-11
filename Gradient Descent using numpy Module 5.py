@@ -12,7 +12,7 @@ def forward(x):
 
 # lossfunction
 def loss(y,y_pred):
-    return ((y-y_pred)**2)
+    return ((y-y_pred)**2).mean()
 
 def gradient(x,y,y_pred): #manually computing gradient in numpy (not the case in torch)
     return np.dot(2*x,(y_pred-y)).mean()
@@ -27,5 +27,10 @@ for epoch in range(n_iters):
     l=loss(y,y_pred)
     dw=gradient(x,y,y_pred)
     w-=learning_rate*dw #update formula
-    if epoch%1==0:
-        print(f'epoch {epoch+1}: w={w:.3f}, loss={l:.8f}')
+    if epoch%2==0:
+        print(f'epoch {epoch+1}: w={w:.3f},loss={l:.3f}')
+print(f'Prediction after training :f(5)={forward(5):.3f}')
+
+# this is how we solve linear regression problem using numpy 
+
+
